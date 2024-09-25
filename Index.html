@@ -11,9 +11,9 @@
 
 <body>
 
-    <div class="conteiner">
+    <div class="container">
         <div class="conteudo">
-            <h1>WebSocket Chat</h1>
+            <h1>Chat anônimo</h1>
 
             <div>
                 <input type="text" id="msg" placeholder=" Digite sua mensagem">
@@ -43,13 +43,13 @@
 
                     if (messageText !== '') {
                         socket.send(messageText); // Envia a mensagem ao servidor via WebSocket
-
+                        /*
                         // Exibe a mensagem enviada na tela com prefixo "Você"
                         const messages = document.getElementById('messages');
                         const li = document.createElement('li');
                         li.textContent = `Você: ${messageText}`;
                         messages.appendChild(li);
-
+                        */
                         input.value = ''; // Limpa o campo de input
                     }
                 }

@@ -18,11 +18,12 @@ wss.on('connection', function connection(ws) {
         });
     });
 
+
     // Evento de desconexão do cliente
-    ws.on('close', function() {
+    ws.on('close', function () {
         console.log('Cliente desconectado.');
     });
-    
+
     // Envia uma mensagem ao cliente quando ele se conecta
     ws.send('Bem-vindo ao WebSocket servidor!');
 });

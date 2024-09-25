@@ -2,37 +2,71 @@ body {
     margin: 0;
     height: 100vh;
     display: flex;
-    justify-content: center;  /* Centraliza horizontalmente */
-    align-items: center;      /* Centraliza verticalmente */
+    justify-content: center;
+    align-items: center;
     background-color: #f0f0f0;
     font-family: Arial, sans-serif;
 }
 
-/* Estilo da div centralizada */
-.conteiner {
+.container {
     background-color: #81b7f5;
-    color: white;
+    color: black;
     padding: 20px;
     border-radius: 10px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    height: 300px;
     border: 1px solid black;
 }
 
-.conteudo{
+.conteudo {
     padding-top: 10px;
     padding-left: 20px;
 }
 
-input{
-    height:30px;
-    width:270px;
+input {
+    height: 30px;
+    width: 270px;
     border-radius: 10px;
 }
 
-button{
+button {
     background-color: rgb(25, 157, 209);
     border-radius: 10px;
-    height:35px;
+    height: 35px;
+}
+
+/* Estilos para as mensagens */
+#messages {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    max-height: 300px;
+    overflow-y: auto;
+    /* Permite rolagem se houver muitas mensagens */
+}
+
+.message {
+    padding: 10px 15px;
+    border-radius: 15px;
+    margin: 5px 0;
+    display: inline-block;
+    max-width: 70%;
+    text-align: left;
+    /* Alinha o texto à esquerda */
+}
+
+.sender {
+    background-color: #dcf8c6;
+    margin-left: auto;
+    /* Alinha à direita */
+    border-radius: 15px 15px 0 15px;
+    /* Cantos arredondados */
+}
+
+.receiver {
+    background-color: #ffffff;
+    margin-right: auto;
+    /* Alinha à esquerda */
+    border-radius: 15px 15px 15px 0;
+    /* Cantos arredondados */
 }
