@@ -1,16 +1,38 @@
-/**{
-    border: 0px;
-    margin: 0px;
-    padding: 0px;
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;  /* Centraliza horizontalmente */
+    align-items: center;      /* Centraliza verticalmente */
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
 }
 
-.container{
-    width: 600px;
-    height: 600px;
-    display: flex;
-    justify-content: center; /* Centraliza horizontalmente 
-    align-items: center; /* Centraliza verticalmente 
-    height: 100vh; /* Ocupa a altura total da viewport 
+/* Estilo da div centralizada */
+.conteiner {
+    background-color: #81b7f5;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 300px;
     border: 1px solid black;
-    background-color: aqua;
-}*/
+}
+
+.conteudo{
+    padding-top: 10px;
+    padding-left: 20px;
+}
+
+input{
+    height:30px;
+    width:270px;
+    border-radius: 10px;
+}
+
+button{
+    background-color: rgb(25, 157, 209);
+    border-radius: 10px;
+    height:35px;
+}

@@ -1,53 +1,71 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Chat</title>
     <link rel="stylesheet" href="style.css">
-    <title>Chat WebSocket</title>
+
 </head>
 
 <body>
-    <div class="container">
-        <h1>Chat WebSocket</h1>
-        <ul id="messages"></ul>
-        <input id="msg" type="text" placeholder="Digite sua mensagem" autocomplete="off" />
-        <button id="send">Enviar</button>
 
-        <script>
-            const socket = new WebSocket('ws://localhost:3000');
+    <div class="conteiner">
+        <div class="conteudo">
+            <h1>WebSocket Chat</h1>
 
-            socket.onmessage = function (event) {
-                const messages = document.getElementById('messages'); // Seleciona a lista de mensagens
-                const li = document.createElement('li'); // Cria um novo item de lista
-                li.textContent = messageText; // Define o texto do item como a mensagem digitada
-                messages.appendChild(li); // Adiciona a mensagem à lista de mensagens
-            };
+            <div>
+                <input type="text" id="msg" placeholder=" Digite sua mensagem">
+                <button id="send">Enviar</button>
+            </div>
 
-            // Função para enviar mensagem
-            function sendMessage() {
-                const input = document.getElementById('msg');
-                if (input.value.trim() !== '') { // Verifica se há algo digitado
-                    socket.send(input.value);
-                    input.value = ''; // Limpa o campo de entrada após o envio
+            <ul id="messages">
+                <!-- As mensagens aparecerão aqui -->
+            </ul>
+
+            <script>
+                // Conecta ao WebSocket no servidor
+                const socket = new WebSocket('ws://localhost:3000');
+
+                // Quando o servidor envia uma mensagem
+                socket.onmessage = function (event) {
+                    const messages = document.getElementById('messages'); // Seleciona a lista de mensagens
+                    const li = document.createElement('li');              // Cria um novo item de lista (li)
+                    li.textContent = event.data;                          // Define o texto do item como a mensagem recebida
+                    messages.appendChild(li);                             // Adiciona o item à lista de mensagens
+                };
+
+                // Função que envia a mensagem digitada pelo cliente
+                function sendMessage() {
+                    const input = document.getElementById('msg'); // Obtém o campo de input
+                    const messageText = input.value.trim(); // Remove espaços em branco desnecessários
+
+                    if (messageText !== '') {
+                        socket.send(messageText); // Envia a mensagem ao servidor via WebSocket
+
+                        // Exibe a mensagem enviada na tela com prefixo "Você"
+                        const messages = document.getElementById('messages');
+                        const li = document.createElement('li');
+                        li.textContent = `Você: ${messageText}`;
+                        messages.appendChild(li);
+
+                        input.value = ''; // Limpa o campo de input
+                    }
                 }
-            }
 
-            // Clique no botão "send" para enviar a mensagem
-            document.getElementById('send').onclick = function () {
-                sendMessage();
-            };
+                // Associar o clique do botão de enviar ao envio da mensagem
+                document.getElementById('send').onclick = sendMessage;
 
-            // Captura o evento de pressionar "Enter" no campo de input
-            document.getElementById('msg').addEventListener('keypress', function (event) {
-                if (event.key === 'Enter') {
-                    event.preventDefault(); // Previne o comportamento padrão do Enter
-                    sendMessage();
-                }
-            });
-        </script>
-
+                // Permite enviar a mensagem com a tecla Enter
+                document.getElementById('msg').addEventListener('keydown', function (event) {
+                    if (event.key === 'Enter') {
+                        event.preventDefault(); // Evita a quebra de linha no input
+                        sendMessage(); // Envia a mensagem
+                    }
+                });
+            </script>
+        </div>
     </div>
 </body>
 

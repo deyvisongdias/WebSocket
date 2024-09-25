@@ -1,23 +1,30 @@
 const WebSocket = require('ws');
 
-const server = new WebSocket.Server({ port: 3000 });
+// Cria um servidor WebSocket rodando na porta 3000
+const wss = new WebSocket.Server({ port: 3000 });
 
-server.on('connection', (socket) => {
-    console.log('Novo cliente conectado!');
+wss.on('connection', function connection(ws) {
+    console.log('Cliente conectado.');
 
-    socket.on('message', (message) => {
-        console.log(`Recebido: ${message}`);
-        // Envia a mensagem de volta para todos os clientes conectados
-        server.clients.forEach((client) => {
+    // Quando o servidor recebe uma mensagem de um cliente
+    ws.on('message', function incoming(message) {
+        console.log(`Mensagem recebida: ${message}`);
+
+        // Envia a mensagem de volta a todos os clientes conectados
+        wss.clients.forEach(function each(client) {
             if (client.readyState === WebSocket.OPEN) {
-                client.send(message);
+                client.send(`Cliente: ${message}`);
             }
         });
     });
 
-    socket.on('close', () => {
-        console.log('Cliente desconectado!');
+    // Evento de desconexão do cliente
+    ws.on('close', function() {
+        console.log('Cliente desconectado.');
     });
+    
+    // Envia uma mensagem ao cliente quando ele se conecta
+    ws.send('Bem-vindo ao WebSocket servidor!');
 });
 
-console.log('Servidor WebSocket rodando na porta 8080');
+console.log('Servidor WebSocket rodando na porta 3000');
