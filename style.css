@@ -1,0 +1,16 @@
+/**{
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.container{
+    width: 600px;
+    height: 600px;
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente 
+    align-items: center; /* Centraliza verticalmente 
+    height: 100vh; /* Ocupa a altura total da viewport 
+    border: 1px solid black;
+    background-color: aqua;
+}*/
