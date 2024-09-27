@@ -9,7 +9,7 @@ body {
 }
 
 .container {
-    background-color: #81b7f5;
+    background-color: #a2cbfa;
     color: black;
     padding: 20px;
     border-radius: 10px;
@@ -33,40 +33,14 @@ button {
     background-color: rgb(25, 157, 209);
     border-radius: 10px;
     height: 35px;
+    color: white;
 }
 
 /* Estilos para as mensagens */
 #messages {
     list-style: none;
     padding: 0;
-    margin: 20px 0;
     max-height: 300px;
-    overflow-y: auto;
-    /* Permite rolagem se houver muitas mensagens */
-}
-
-.message {
-    padding: 10px 15px;
-    border-radius: 15px;
-    margin: 5px 0;
-    display: inline-block;
-    max-width: 70%;
     text-align: left;
-    /* Alinha o texto à esquerda */
-}
-
-.sender {
-    background-color: #dcf8c6;
-    margin-left: auto;
-    /* Alinha à direita */
-    border-radius: 15px 15px 0 15px;
-    /* Cantos arredondados */
-}
-
-.receiver {
-    background-color: #ffffff;
-    margin-right: auto;
-    /* Alinha à esquerda */
-    border-radius: 15px 15px 15px 0;
-    /* Cantos arredondados */
+    overflow-y: auto; /* Permite rolagem se houver muitas mensagens */
 }
