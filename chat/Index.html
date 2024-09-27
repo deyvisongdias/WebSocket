@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebSocket Chat</title>
-    <link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" href="Files/style.css">
+    <script type="text/javascript" src="script.js"></script>
 </head>
-<body>
 
+<body>
     <div class="container">
         <div class="conteudo">
             <h1>Web Chat</h1>
@@ -25,7 +25,7 @@
 
             <script>
                 // Conecta ao WebSocket no servidor
-                const socket = new WebSocket('ws://localhost:3000');
+                const socket = new WebSocket('ws://localhost:8080');
 
                 // Quando o servidor envia uma mensagem
                 socket.onmessage = function (event) {
