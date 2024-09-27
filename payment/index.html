@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>App de Pagamento</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+      }
+
+      body {
+        background-color: #f5f5f7;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #333;
+      }
+
+      .container {
+        background: #ffffff;
+        border-radius: 20px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        padding: 40px;
+        width: 350px;
+        transition: box-shadow 0.3s ease;
+      }
+
+      .container:hover {
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #000;
+      }
+
+      #payButton {
+        background: #007aff;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 16px;
+        color: #fff;
+        transition: background 0.3s ease;
+      }
+
+      #payButton:hover {
+        background: #005bb5;
+      }
+
+      #status {
+        margin-top: 20px;
+        font-size: 16px;
+        color: #666;
+        padding: 10px;
+        border-radius: 10px;
+        background-color: #f0f0f0;
+      }
+
+      /* Responsividade */
+      @media (max-width: 400px) {
+        .container {
+          width: 90%;
+          padding: 20px;
+        }
+
+        h1 {
+          font-size: 20px;
+        }
+
+        #payButton {
+          padding: 10px 20px;
+          font-size: 14px;
+        }
+
+        #status {
+          font-size: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Simulador de Pagamento</h1>
+      <button id="payButton">Pagar Agora</button>
+      <p id="status">Status: Aguardando pagamento...</p>
+    </div>
+
+    <script>
+      const socket = new WebSocket("ws://localhost:8080");
+
+      socket.onopen = () => {
+        console.log("Conectado ao servidor WebSocket.");
+      };
+
+      socket.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+        document.getElementById(
+          "status"
+        ).textContent = `Status: ${data.message}`;
+      };
+
+      document.getElementById("payButton").addEventListener("click", () => {
+        document.getElementById("status").textContent =
+          "Status: Processando pagamento...";
+
+        socket.send(JSON.stringify({ action: "pay" }));
+      });
+
+      socket.onclose = () => {
+        console.log("Conexão WebSocket fechada.");
+      };
+
+      socket.onerror = (error) => {
+        console.error("Erro no WebSocket: ", error);
+      };
+    </script>
+  </body>
+</html>
